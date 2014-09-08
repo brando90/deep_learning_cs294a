@@ -24,18 +24,21 @@ patches = zeros(patchsize*patchsize, numpatches);
 %  patch corresponding to the pixels in the block (21,21) to (30,30) of
 %  Image 1
 
-size_img = size(IMAGES)
-num_rows_img = size_img(1)
-num_cols_img = size_img(2)
-num_images = size_img(3)
-for i=1:numpathches,
-    %get random image
-    rand_img_number = randi(size_img)
-    rand_img = IMAGES(:, :, rand_img_number)
-    %get random patch patchsizexpatchsize
-    rand_row = randi(num_rows_img)
-    rand_col = randi(num_cols_img)
-    patches(row, :) = rand_img(rand_row:rand_row+patchsize, rand_col:rand_col+patchsize)
+[num_rows_img, num_cols_img, num_images] = size(IMAGES);
+rand_img_numbers = randi(num_images, numpatches, 1);
+rand_rows = randi(num_rows_img - , numpatches, 1);
+rand_cols = randi(num_cols_img, numpatches, 1);
+for i=1:numpatches,
+    rand_row = rand_rows(i);
+    rand_col = rand_cols(i);
+    rand_img_number = rand_img_numbers(i);
+    rand_patch = IMAGES(rand_row:rand_row+patchsize-1, rand_col:rand_col+patchsize-1, rand_img_number);
+%     disp(size(rand_patch(:)'))
+    disp(size(rand_patch(:)))
+    disp(size(patches(:, i)))
+    disp(size(patches))
+    disp(i)
+    patches(:, i) = rand_patch(:);
 end
 
 
